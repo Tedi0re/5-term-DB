@@ -144,6 +144,8 @@ create table C
     Y  int
 ) cluster U1_SAA_PDB.ABC (XC, VC);
 
+
+select * from SYS.DBA_CLUSTERS
 ------------------------------------ Задание №13
 select cluster_name, owner
 from SYS.DBA_CLUSTERS;
@@ -163,7 +165,7 @@ from SYNONYM_C;
 ------------------------------------ Задание №15
 --drop synonym SYNONYM_B;
 
-create synonym SYNONYM_B for U1_SAA_PDB.B;
+create public synonym SYNONYM_B for U1_SAA_PDB.B;
 insert into SYNONYM_B
 values (2, 'b', 9);
 select *
@@ -210,7 +212,7 @@ from V1;
 create materialized view MV
     build immediate
     refresh complete on demand
-    next sysdate + numtodsinterval(2, 'minute')
+    next sysdate + numtodsinterval(1, 'minute')
 as
 select * from Task_A full join Task_B TB on Task_A.X = TB.Y;
 
